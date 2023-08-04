@@ -1,0 +1,46 @@
+PODS:
+  - Alamofire (5.6.4)
+  - ASN1Decoder (1.8.0)
+  - PromiseKit (6.18.1):
+    - PromiseKit/CorePromise (= 6.18.1)
+    - PromiseKit/Foundation (= 6.18.1)
+    - PromiseKit/UIKit (= 6.18.1)
+  - PromiseKit/CorePromise (6.18.1)
+  - PromiseKit/Foundation (6.18.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.18.1):
+    - PromiseKit/CorePromise
+  - SnapKit (5.6.0)
+  - SwiftyJSON (5.0.1)
+  - SwiftyRSA (1.7.0):
+    - SwiftyRSA/ObjC (= 1.7.0)
+  - SwiftyRSA/ObjC (1.7.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - ASN1Decoder
+  - PromiseKit
+  - SnapKit
+  - SwiftyJSON
+  - SwiftyRSA
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - ASN1Decoder
+    - PromiseKit
+    - SnapKit
+    - SwiftyJSON
+    - SwiftyRSA
+
+SPEC CHECKSUMS:
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  ASN1Decoder: 6110fdeacfdb41559b1481457a1645be716610aa
+  PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
+
+PODFILE CHECKSUM: d9b4e15c784cf87a24f86bcc7bb36a7c73ac716a
+
+COCOAPODS: 1.12.1

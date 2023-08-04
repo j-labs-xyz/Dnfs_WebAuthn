@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14714C9643D9D886B4D54EB4 /* Pods_WebAuthn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A632D28360864B20C5F819B7 /* Pods_WebAuthn.framework */; };
+		BA3951632A77CAC3008B7EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3951622A77CAC3008B7EF9 /* AppDelegate.swift */; };
+		BA3951672A77CAC3008B7EF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3951662A77CAC3008B7EF9 /* ViewController.swift */; };
+		BA39516A2A77CAC3008B7EF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA3951682A77CAC3008B7EF9 /* Main.storyboard */; };
+		BA39516C2A77CAC3008B7EF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA39516B2A77CAC3008B7EF9 /* Assets.xcassets */; };
+		BA39516F2A77CAC3008B7EF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA39516D2A77CAC3008B7EF9 /* LaunchScreen.storyboard */; };
+		BA3951772A77CC25008B7EF9 /* DfnsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3951762A77CC25008B7EF9 /* DfnsManager.swift */; };
+		BA91B77A2A7A389F0037F56F /* dfns.json in Resources */ = {isa = PBXBuildFile; fileRef = BA91B7792A7A389F0037F56F /* dfns.json */; };
+		BAE6B4172A7A75E600FE6A35 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = BAE6B4162A7A75E600FE6A35 /* Crypto */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8D181A3E5E7805961CDE9349 /* Pods-WebAuthn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebAuthn.release.xcconfig"; path = "Target Support Files/Pods-WebAuthn/Pods-WebAuthn.release.xcconfig"; sourceTree = "<group>"; };
+		A632D28360864B20C5F819B7 /* Pods_WebAuthn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebAuthn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA39515F2A77CAC3008B7EF9 /* WebAuthn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebAuthn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA3951622A77CAC3008B7EF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BA3951662A77CAC3008B7EF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BA3951692A77CAC3008B7EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BA39516B2A77CAC3008B7EF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BA39516E2A77CAC3008B7EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BA3951702A77CAC3008B7EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA3951762A77CC25008B7EF9 /* DfnsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DfnsManager.swift; sourceTree = "<group>"; };
+		BA91B7792A7A389F0037F56F /* dfns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dfns.json; sourceTree = "<group>"; };
+		BAE6B41A2A7BB14100FE6A35 /* WebAuthn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebAuthn.entitlements; sourceTree = "<group>"; };
+		E12E19A897A73392343DC490 /* Pods-WebAuthn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebAuthn.debug.xcconfig"; path = "Target Support Files/Pods-WebAuthn/Pods-WebAuthn.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA39515C2A77CAC3008B7EF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14714C9643D9D886B4D54EB4 /* Pods_WebAuthn.framework in Frameworks */,
+				BAE6B4172A7A75E600FE6A35 /* Crypto in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		57E2CBEDA499CD0EC4135D5E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E12E19A897A73392343DC490 /* Pods-WebAuthn.debug.xcconfig */,
+				8D181A3E5E7805961CDE9349 /* Pods-WebAuthn.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		84CD377167CCFF8095249B26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A632D28360864B20C5F819B7 /* Pods_WebAuthn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA3951562A77CAC3008B7EF9 = {
+			isa = PBXGroup;
+			children = (
+				BA3951612A77CAC3008B7EF9 /* WebAuthn */,
+				BA3951602A77CAC3008B7EF9 /* Products */,
+				57E2CBEDA499CD0EC4135D5E /* Pods */,
+				84CD377167CCFF8095249B26 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BA3951602A77CAC3008B7EF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA39515F2A77CAC3008B7EF9 /* WebAuthn.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA3951612A77CAC3008B7EF9 /* WebAuthn */ = {
+			isa = PBXGroup;
+			children = (
+				BAE6B41A2A7BB14100FE6A35 /* WebAuthn.entitlements */,
+				BA3951622A77CAC3008B7EF9 /* AppDelegate.swift */,
+				BA3951662A77CAC3008B7EF9 /* ViewController.swift */,
+				BA3951762A77CC25008B7EF9 /* DfnsManager.swift */,
+				BA91B7792A7A389F0037F56F /* dfns.json */,
+				BA3951682A77CAC3008B7EF9 /* Main.storyboard */,
+				BA39516B2A77CAC3008B7EF9 /* Assets.xcassets */,
+				BA39516D2A77CAC3008B7EF9 /* LaunchScreen.storyboard */,
+				BA3951702A77CAC3008B7EF9 /* Info.plist */,
+			);
+			path = WebAuthn;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BA39515E2A77CAC3008B7EF9 /* WebAuthn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA3951732A77CAC3008B7EF9 /* Build configuration list for PBXNativeTarget "WebAuthn" */;
+			buildPhases = (
+				6C36A4CD65E2BB6F246D1D29 /* [CP] Check Pods Manifest.lock */,
+				BA39515B2A77CAC3008B7EF9 /* Sources */,
+				BA39515C2A77CAC3008B7EF9 /* Frameworks */,
+				BA39515D2A77CAC3008B7EF9 /* Resources */,
+				1043DE535C8D8CCBFBAF89F4 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebAuthn;
+			packageProductDependencies = (
+				BAE6B4162A7A75E600FE6A35 /* Crypto */,
+			);
+			productName = WebAuthn;
+			productReference = BA39515F2A77CAC3008B7EF9 /* WebAuthn.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA3951572A77CAC3008B7EF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					BA39515E2A77CAC3008B7EF9 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = BA39515A2A77CAC3008B7EF9 /* Build configuration list for PBXProject "WebAuthn" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BA3951562A77CAC3008B7EF9;
+			packageReferences = (
+				BAE6B4152A7A75E600FE6A35 /* XCRemoteSwiftPackageReference "swift-crypto" */,
+			);
+			productRefGroup = BA3951602A77CAC3008B7EF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA39515E2A77CAC3008B7EF9 /* WebAuthn */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA39515D2A77CAC3008B7EF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA91B77A2A7A389F0037F56F /* dfns.json in Resources */,
+				BA39516F2A77CAC3008B7EF9 /* LaunchScreen.storyboard in Resources */,
+				BA39516C2A77CAC3008B7EF9 /* Assets.xcassets in Resources */,
+				BA39516A2A77CAC3008B7EF9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1043DE535C8D8CCBFBAF89F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WebAuthn/Pods-WebAuthn-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WebAuthn/Pods-WebAuthn-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WebAuthn/Pods-WebAuthn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C36A4CD65E2BB6F246D1D29 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebAuthn-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA39515B2A77CAC3008B7EF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA3951672A77CAC3008B7EF9 /* ViewController.swift in Sources */,
+				BA3951632A77CAC3008B7EF9 /* AppDelegate.swift in Sources */,
+				BA3951772A77CC25008B7EF9 /* DfnsManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BA3951682A77CAC3008B7EF9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA3951692A77CAC3008B7EF9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BA39516D2A77CAC3008B7EF9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA39516E2A77CAC3008B7EF9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BA3951712A77CAC3008B7EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BA3951722A77CAC3008B7EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BA3951742A77CAC3008B7EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E12E19A897A73392343DC490 /* Pods-WebAuthn.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WebAuthn/WebAuthn.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9XX98238M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebAuthn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlabs.webAuthn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = webAuthn_dev_profile;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		BA3951752A77CAC3008B7EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D181A3E5E7805961CDE9349 /* Pods-WebAuthn.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WebAuthn/WebAuthn.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9XX98238M5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebAuthn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlabs.webAuthn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = webAuthn_dev_profile;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BA39515A2A77CAC3008B7EF9 /* Build configuration list for PBXProject "WebAuthn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA3951712A77CAC3008B7EF9 /* Debug */,
+				BA3951722A77CAC3008B7EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA3951732A77CAC3008B7EF9 /* Build configuration list for PBXNativeTarget "WebAuthn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA3951742A77CAC3008B7EF9 /* Debug */,
+				BA3951752A77CAC3008B7EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BAE6B4152A7A75E600FE6A35 /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BAE6B4162A7A75E600FE6A35 /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAE6B4152A7A75E600FE6A35 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BA3951572A77CAC3008B7EF9 /* Project object */;
+}
