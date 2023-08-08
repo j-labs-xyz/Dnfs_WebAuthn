@@ -109,9 +109,9 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
         self.registerCodeInput.resignFirstResponder()
     }
     
-    var index = 250
+    var index = 0
     @IBAction func createUser() {
-        var name = "leven0" + "\(index)"
+        var name = "leven1" + "\(index)"
         
         DfnsManager.shared.register(username: name, password: "123456").done { options in
             self.index += 1
@@ -144,6 +144,71 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
             print(err)
         }
     }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let credentialRegistration as ASAuthorizationPlatformPublicKeyCredentialRegistration:
+            // After the webapp has verified the registration and created the user account, sign the user in with the new account.
+            print(credentialRegistration)
+            let token = self.registerRes?["temporaryAuthenticationToken"].stringValue ?? ""
+    
+            let rawClientDataJSON = credentialRegistration.rawClientDataJSON.toBase64Url()
+            let rawAttestationObject = credentialRegistration.rawAttestationObject?.toBase64Url()
+            let credentialID = credentialRegistration.credentialID.toBase64Url()
+            
+            if let clientJson = String(data: credentialRegistration.rawClientDataJSON, encoding: .utf8) {
+                print(clientJson)
+            }
+            
+            let p: [String: Any] = [
+                "firstFactorCredential": [
+                    "credentialKind": "Fido2",
+                    "credentialInfo": [
+                        "credId" : credentialID,
+                        "clientData": rawClientDataJSON,
+                        "attestationData": rawAttestationObject,
+                    ],
+                ] as [String : Any]
+            ]
+            DfnsManager.shared.request.completeRegister(params: p, headers: ["Authorization": "Bearer " + token]).done { json in
+                print(json)
+                if let errorMsg = json["error"]["message"].string {
+                    self.statusLabel.text = "authorization request failed \n" + errorMsg
+                }
+            }.catch { error in
+                print(error)
+                self.statusLabel.text = "authorization request failed \n" + error.localizedDescription
+            }
+            
+
+        case let credentialAssertion as ASAuthorizationPlatformPublicKeyCredentialAssertion:
+            // After the server has verified the assertion, sign the user in.
+            print(credentialAssertion)
+
+        default:
+            fatalError("Received unknown authorization type.")
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        guard let authorizationError = ASAuthorizationError.Code(rawValue: (error as NSError).code) else {
+            return
+        }
+        self.statusLabel.text = "authorization request failed \n" + error.localizedDescription
+
+        if authorizationError == .canceled {
+            // Either no credentials were found and the request silently ended, or the user canceled the request.
+            // Consider asking the user to create an account.
+        } else {
+            // Other ASAuthorization error.
+            // The userInfo dictionary should contain useful information.
+        }
+    }
+    
+    
+    
+    
+    
     
     @IBAction func resendUser() {
         self.index += 1;
@@ -208,66 +273,7 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
         return self.view.window!
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let credentialRegistration as ASAuthorizationPlatformPublicKeyCredentialRegistration:
-            // After the webapp has verified the registration and created the user account, sign the user in with the new account.
-            print(credentialRegistration)
-            let token = self.registerRes?["temporaryAuthenticationToken"].stringValue ?? ""
-    
-            let rawClientDataJSON = credentialRegistration.rawClientDataJSON.toBase64Url()
-            let rawAttestationObject = credentialRegistration.rawAttestationObject?.toBase64Url()
-            let credentialID = credentialRegistration.credentialID.toBase64Url()
-            
-            if let clientJson = String(data: credentialRegistration.rawClientDataJSON, encoding: .utf8) {
-                print(clientJson)
-            }
-            
-            let p: [String: Any] = [
-                "firstFactorCredential": [
-                    "credentialKind": "Fido2",
-                    "credentialInfo": [
-                        "credId" : credentialID,
-                        "clientData": rawClientDataJSON,
-                        "attestationData": rawAttestationObject,
-                    ],
-                ] as [String : Any]
-            ]
-            DfnsManager.shared.request.completeRegister(params: p, headers: ["Authorization": "Bearer " + token]).done { json in
-                print(json)
-                if let errorMsg = json["error"]["message"].string {
-                    self.statusLabel.text = "authorization request failed \n" + errorMsg
-                }
-            }.catch { error in
-                print(error)
-                self.statusLabel.text = "authorization request failed \n" + error.localizedDescription
-            }
-            
 
-        case let credentialAssertion as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-            // After the server has verified the assertion, sign the user in.
-            print(credentialAssertion)
-
-        default:
-            fatalError("Received unknown authorization type.")
-        }
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        guard let authorizationError = ASAuthorizationError.Code(rawValue: (error as NSError).code) else {
-            return
-        }
-        self.statusLabel.text = "authorization request failed \n" + error.localizedDescription
-
-        if authorizationError == .canceled {
-            // Either no credentials were found and the request silently ended, or the user canceled the request.
-            // Consider asking the user to create an account.
-        } else {
-            // Other ASAuthorization error.
-            // The userInfo dictionary should contain useful information.
-        }
-    }
-    
 
 }
 
