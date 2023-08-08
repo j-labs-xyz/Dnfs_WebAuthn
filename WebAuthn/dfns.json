@@ -16,19 +16,19 @@
 		},
 		{
 			"key": "credentialPrivateKey",
-			"value": "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEIA5ssO9eRgeJTzdxTDnwJH2eH4fxMSnZv41awlVaj2tEoAoGCCqGSM49\nAwEHoUQDQgAE4sqwGUkdu09i6C5gfZfhIlE6jVBeSP9DVtpQyGnLLwPe01iUxyUC\nrQ2u+CChGadBRg3xPXYMF5SPG0qSsvQzYg==\n-----END EC PRIVATE KEY-----",
+			"value": "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEIA5ssO9eRgeJTzdxTDnwJH2eH4fxMSnZv41awlVaj2tEoAoGCCqGSM49 AwEHoUQDQgAE4sqwGUkdu09i6C5gfZfhIlE6jVBeSP9DVtpQyGnLLwPe01iUxyUC rQ2u+CChGadBRg3xPXYMF5SPG0qSsvQzYg==\n-----END EC PRIVATE KEY-----",
 			"type": "secret",
 			"enabled": true
 		},
 		{
 			"key": "applicationId",
-			"value": "ap-mgvcq-t0dk8-8opht2hlkkj6tve",
+			"value": "ap-7sce1-fqpdh-9jvrgjl8mgg68ola",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "applicationOrigin",
-			"value": "https://app.dfns.ninja",
+			"value": "https://j-labs.xyz",
 			"type": "default",
 			"enabled": true
 		},

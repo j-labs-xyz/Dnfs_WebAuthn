@@ -178,18 +178,28 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ASN1Decoder/ASN1Decoder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/EllipticCurveKeyPair/EllipticCurveKeyPair.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyRSA/SwiftyRSA.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WebAuthnKit/WebAuthnKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ASN1Decoder/ASN1Decoder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/EllipticCurveKeyPair/EllipticCurveKeyPair.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyRSA/SwiftyRSA.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WebAuthnKit/WebAuthnKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

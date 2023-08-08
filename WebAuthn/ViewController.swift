@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 import SwiftyJSON
 import AuthenticationServices
+//import Web
+// https://medium.com/webauthnworks/introduction-to-webauthn-api-5fd1fb46c285
+// https://medium.com/androiddevelopers/bringing-seamless-authentication-to-your-apps-using-credential-manager-api-b3f0d09e0093
 class ViewController: UIViewController, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
 
 
@@ -106,17 +109,45 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
         self.registerCodeInput.resignFirstResponder()
     }
     
+    var index = 250
     @IBAction func createUser() {
-        self.statusLabel.text = "sending user email..."
-        DfnsManager.shared.request.createUser(email: self.email).done { json in
-            self.statusLabel.text = "sending user email succeed!"
-        }.catch { error in
-            print(error)
-            self.statusLabel.text = "sending user email failed! \n" + error.localizedDescription
+        var name = "leven0" + "\(index)"
+        
+        DfnsManager.shared.register(username: name, password: "123456").done { options in
+            self.index += 1
+            self.registerRes = options
+            print(options)
+            let domain = "j-labs.xyz"
+            let username = options["user"]["name"].stringValue
+            let challenge = (options["challenge"].string ?? "").data(using: .utf8) ?? Data()
+            let userID = (options["user"]["id"].string ?? "").data(using: .utf8) ?? Data()
+            let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: domain)
+
+            let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge,
+                                                                                                      name: username, userID: userID)
+//            if let attestation = self.registerRes?["attestation"].stringValue, attestation.count > 0  {
+//                registrationRequest.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind.init(rawValue: attestation)
+//            }
+//
+            if let userVerification = options["authenticatorSelection"]["userVerification"].string, userVerification.count > 0 {
+                registrationRequest.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference.init(rawValue: userVerification)
+            }
+            self.statusLabel.text = "authorization requesting..."
+
+            let authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
+            authController.delegate = self
+            authController.presentationContextProvider = self
+            authController.performRequests()
+            
+            
+        }.catch { err in
+            print(err)
         }
     }
     
     @IBAction func resendUser() {
+        self.index += 1;
+        return
         self.statusLabel.text = "resending user email..."
 
         DfnsManager.shared.request.resendEmail(email: self.email).done { json in
@@ -146,7 +177,7 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
     }
     
     @IBAction func webAuthnRegister() {
-        let domain = "j-labs.xyz"
+        let domain = "j-labs"
         let username = self.registerRes?["user"]["name"].stringValue ?? ""
 
         let challenge = (self.registerRes?["challenge"].stringValue ?? "").decodeBase64Url() ?? Data()
@@ -157,9 +188,9 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
 
         let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge,
                                                                                                   name: username, userID: userID)
-//        if let attestation = self.registerRes?["attestation"].stringValue, attestation.count > 0  {
-//            registrationRequest.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind.init(rawValue: attestation)
-//        }
+        if let attestation = self.registerRes?["attestation"].stringValue, attestation.count > 0  {
+            registrationRequest.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind.init(rawValue: attestation)
+        }
 //
         if let userVerification = self.registerRes?["authenticatorSelection"]["userVerification"].stringValue, userVerification.count > 0 {
             registrationRequest.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference.init(rawValue: userVerification)
@@ -183,18 +214,22 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
             // After the webapp has verified the registration and created the user account, sign the user in with the new account.
             print(credentialRegistration)
             let token = self.registerRes?["temporaryAuthenticationToken"].stringValue ?? ""
-
-            let rawClientDataJSON = String(data: credentialRegistration.rawClientDataJSON, encoding: .utf8) ?? ""
-            let rawAttestationObject = String(data: credentialRegistration.rawAttestationObject ?? Data(), encoding: .utf8) ?? ""
-            let credentialID = String(data: credentialRegistration.credentialID, encoding: .utf8) ?? ""
-
+    
+            let rawClientDataJSON = credentialRegistration.rawClientDataJSON.toBase64Url()
+            let rawAttestationObject = credentialRegistration.rawAttestationObject?.toBase64Url()
+            let credentialID = credentialRegistration.credentialID.toBase64Url()
+            
+            if let clientJson = String(data: credentialRegistration.rawClientDataJSON, encoding: .utf8) {
+                print(clientJson)
+            }
+            
             let p: [String: Any] = [
                 "firstFactorCredential": [
                     "credentialKind": "Fido2",
                     "credentialInfo": [
-                        "credId" : credentialRegistration.credentialID.toBase64Url(),
-                        "clientData": credentialRegistration.rawClientDataJSON.toBase64Url(),
-                        "attestationData": credentialRegistration.rawAttestationObject?.toBase64Url() ?? ""
+                        "credId" : credentialID,
+                        "clientData": rawClientDataJSON,
+                        "attestationData": rawAttestationObject,
                     ],
                 ] as [String : Any]
             ]

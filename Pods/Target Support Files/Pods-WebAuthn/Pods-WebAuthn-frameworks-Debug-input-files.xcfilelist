@@ -1,7 +1,12 @@
 ${PODS_ROOT}/Target Support Files/Pods-WebAuthn/Pods-WebAuthn-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/ASN1Decoder/ASN1Decoder.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
+${BUILT_PRODUCTS_DIR}/EllipticCurveKeyPair/EllipticCurveKeyPair.framework
+${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework
+${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyRSA/SwiftyRSA.framework
+${BUILT_PRODUCTS_DIR}/WebAuthnKit/WebAuthnKit.framework

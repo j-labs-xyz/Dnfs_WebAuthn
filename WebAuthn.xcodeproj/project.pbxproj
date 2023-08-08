@@ -16,6 +16,7 @@
 		BA3951772A77CC25008B7EF9 /* DfnsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3951762A77CC25008B7EF9 /* DfnsManager.swift */; };
 		BA91B77A2A7A389F0037F56F /* dfns.json in Resources */ = {isa = PBXBuildFile; fileRef = BA91B7792A7A389F0037F56F /* dfns.json */; };
 		BAE6B4172A7A75E600FE6A35 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = BAE6B4162A7A75E600FE6A35 /* Crypto */; };
+		BAE6B4202A7F8D0B00FE6A35 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6B41F2A7F8D0B00FE6A35 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		BA3951762A77CC25008B7EF9 /* DfnsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DfnsManager.swift; sourceTree = "<group>"; };
 		BA91B7792A7A389F0037F56F /* dfns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dfns.json; sourceTree = "<group>"; };
 		BAE6B41A2A7BB14100FE6A35 /* WebAuthn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebAuthn.entitlements; sourceTree = "<group>"; };
+		BAE6B41F2A7F8D0B00FE6A35 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E12E19A897A73392343DC490 /* Pods-WebAuthn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebAuthn.debug.xcconfig"; path = "Target Support Files/Pods-WebAuthn/Pods-WebAuthn.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				BA3951622A77CAC3008B7EF9 /* AppDelegate.swift */,
 				BA3951662A77CAC3008B7EF9 /* ViewController.swift */,
 				BA3951762A77CC25008B7EF9 /* DfnsManager.swift */,
+				BAE6B41F2A7F8D0B00FE6A35 /* Model.swift */,
 				BA91B7792A7A389F0037F56F /* dfns.json */,
 				BA3951682A77CAC3008B7EF9 /* Main.storyboard */,
 				BA39516B2A77CAC3008B7EF9 /* Assets.xcassets */,
@@ -223,6 +226,7 @@
 				BA3951672A77CAC3008B7EF9 /* ViewController.swift in Sources */,
 				BA3951632A77CAC3008B7EF9 /* AppDelegate.swift in Sources */,
 				BA3951772A77CC25008B7EF9 /* DfnsManager.swift in Sources */,
+				BAE6B4202A7F8D0B00FE6A35 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +288,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -369,11 +374,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WebAuthn/WebAuthn.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9XX98238M5;
+				DEVELOPMENT_TEAM = 9XX98238M5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebAuthn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -381,6 +385,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,7 +394,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jlabs.webAuthn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = webAuthn_dev_profile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -406,11 +410,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WebAuthn/WebAuthn.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9XX98238M5;
+				DEVELOPMENT_TEAM = 9XX98238M5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebAuthn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -418,6 +421,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -426,7 +430,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jlabs.webAuthn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = webAuthn_dev_profile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;

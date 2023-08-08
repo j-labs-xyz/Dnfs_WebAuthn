@@ -13,13 +13,41 @@ import SwiftyJSON
 import SwiftyRSA
 import CryptoKit
 import CommonCrypto
+import AuthenticationServices
+//import WebAuthnKit
 //import ASN1Decoder
 class DfnsManager {
     
-    lazy var request = Request()
-    
+    let request: Request
+
     static let shared = DfnsManager()
     
+    init() {
+        self.request = Request()
+//        let userConsentUI = UserConsentUI(viewController: UIApplication.shared.keyWindow!.rootViewController!)
+//        let authenticator = InternalAuthenticator(ui: userConsentUI)
+//        WAKLogger.available = true
+//        self.webAuthnClient = WebAuthnClient(
+//            origin:        "localhost:8000.com",
+//            authenticator: authenticator
+//        )
+    }
+    
+    
+    func register(username: String, password: String) -> Promise<JSON> {
+        return request.request(path: "register/init", method: .post, params: ["username" : username, "password": password]).then { json in
+//            var options = PublicKeyCredentialCreationOptions()
+//            options.rp = PublicKeyCredentialRpEntity(id: json["rp"]["id"].stringValue, name: json["rp"]["name"].stringValue)
+//            options.user = PublicKeyCredentialUserEntity(id: Bytes.fromString(json["user"]["id"].stringValue), displayName: json["user"]["displayName"].stringValue, name: json["user"]["name"].stringValue)
+//            options.challenge = Bytes.fromString(json["challenge"].stringValue)
+//            options.pubKeyCredParams = json["pubKeyCredParams"].arrayValue.compactMap({ _ in
+//                return PublicKeyCredentialParameters(alg: .es256)
+//            })
+//            options.authenticatorSelection = AuthenticatorSelectionCriteria(requireResidentKey: json["authenticatorSelection"]["requireResidentKey"].boolValue, userVerification: UserVerificationRequirement.init(rawValue: json["authenticatorSelection"]["userVerification"].stringValue)!)
+//            options.attestation = AttestationConveyancePreference.init(rawValue: json["attestation"].stringValue) ?? AttestationConveyancePreference.direct
+            return Promise.value(json)
+        }
+    }
 }
 
 extension DfnsManager {
@@ -92,14 +120,20 @@ extension DfnsManager {
         }
         
         func completeRegister(params: [String: Any], headers: [String: String]) -> Promise<JSON> {
-            return request(path: "auth/registration", method: .post ,params: params, headers: headers)
+            return request(path: "register/complete", method: .post ,params: ["signedChallenge": params, "temporaryAuthenticationToken" : headers["Authorization"]!], headers: [:])
+
+//            return request(path: "auth/registration", method: .post ,params: params, headers: headers)
         }
         
         
         
         func request(path: String, method: HTTPMethod = .get, params: [String: Any] = [:], headers: [String: String] = [:]) -> Promise<JSON> {
             return signAction(headers[USERACTION_HEADER_KEY] == "", path: path, method: method, params: params).then { userAction in
-                let url = URL(string: "https://" + self.host + "/" + path)!
+//                let url = URL(string: "https://" + self.host + "/" + path)!
+//                let url = URL(string: "http://" + "dfns-api.j-labs.xyz:8000" + "/" + path)!
+                let url = URL(string: "http://" + "localhost:8000" + "/" + path)!
+
+//            https://dfns-api.j-labs.xyz:8000/
                 var defaultHeader = self.getRequestHeaders()
                 defaultHeader.merge(headers, uniquingKeysWith: { $1 })
                 if userAction.count > 0 {
@@ -151,7 +185,7 @@ extension DfnsManager {
                 "kind": "Key",
                 "credentialAssertion": [
                     "credId": challenge["allowCredentials"]["key"].arrayValue.first?["id"].stringValue,
-                    "clientData": clientDataString.base64url,
+                    "clientData": clientDataString.decodeBase64Url()?.toBase64Url() ?? "",
                     "signature": signature
                     ]
                ]
@@ -159,13 +193,13 @@ extension DfnsManager {
                 "challengeIdentifier": challenge["challengeIdentifier"].stringValue,
                 "firstFactor": signedChallenge
                ]
-               
+               return self.request(path: "auth/action", method: .post, params: parms)
 
-               if let data = try? JSONSerialization.data(withJSONObject: parms), let jsonString = String(data: data, encoding: String.Encoding.utf8) {
-                   return self.request(path: "auth/action", method: .post, params: parms)
-               } else {
-                   return Promise<JSON>.init(error: WebAuthnError.message("invalid signedChallenge"))
-               }
+               
+//               if let data = try? JSONSerialization.data(withJSONObject: parms), let jsonString = String(data: data, encoding: String.Encoding.utf8) {
+//               } else {
+//                   return Promise<JSON>.init(error: WebAuthnError.message("invalid signedChallenge"))
+//               }
                
            }.then { json -> Promise<String> in
                return Promise.value(json["userAction"].stringValue)
@@ -256,7 +290,14 @@ extension DfnsManager {
 
 extension DfnsManager {
 
-    
+    class WebAuhn {
+        
+        let rpId: String
+        init(rpId: String) {
+            self.rpId = rpId
+        }
+
+    }
     
     
 }
@@ -270,10 +311,6 @@ extension Data {
 
 extension String {
     
-    var base64url: String? {
-        return self.data(using: .utf8)?.base64EncodedString()
-    }
-    
     func decodeBase64Url() -> Data? {
         var base64 = self
             .replacingOccurrences(of: "-", with: "+")
@@ -281,7 +318,7 @@ extension String {
         if base64.count % 4 != 0 {
             base64.append(String(repeating: "=", count: 4 - base64.count % 4))
         }
-        return Data(base64Encoded: base64)
+        return Data(base64Encoded: self)
     }
     
     var hexData: Data? {
@@ -308,6 +345,7 @@ extension DataRequest {
                     if let data = data, let json = try? JSON(data: data) {
                         resover.fulfill(json)
                     } else {
+                        print(String(data: data ?? Data(), encoding: .utf8))
                         resover.reject(WebAuthnError.message("invalid response data"))
                     }
                 case .failure(let err):
