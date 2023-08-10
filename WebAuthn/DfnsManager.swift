@@ -10,42 +10,120 @@ import Foundation
 import Alamofire
 import PromiseKit
 import SwiftyJSON
-import SwiftyRSA
 import CryptoKit
 import CommonCrypto
 import AuthenticationServices
-//import WebAuthnKit
-//import ASN1Decoder
 class DfnsManager {
     
     let request: Request
+    let passKeys: Passkeys
 
     static let shared = DfnsManager()
     
     init() {
         self.request = Request()
-//        let userConsentUI = UserConsentUI(viewController: UIApplication.shared.keyWindow!.rootViewController!)
-//        let authenticator = InternalAuthenticator(ui: userConsentUI)
-//        WAKLogger.available = true
-//        self.webAuthnClient = WebAuthnClient(
-//            origin:        "localhost:8000.com",
-//            authenticator: authenticator
-//        )
+        self.passKeys = Passkeys()
+    }
+    
+    func register(username: String, password: String) -> Promise<JSON> {
+        var temporaryAuthenticationToken: String = ""
+        return request.request(path: "register/init", method: .post, params: ["username" : username, "password": password]).then { json in
+            temporaryAuthenticationToken = json["temporaryAuthenticationToken"].stringValue
+            return Promise<ASAuthorizationPlatformPublicKeyCredentialRegistration> { resolver in
+                self.passKeys.createPasskeys(json) { res, error in
+                    if let error = error {
+                        resolver.reject(error)
+                    } else if let credentialRegistration = res as? ASAuthorizationPlatformPublicKeyCredentialRegistration {
+                        resolver.fulfill(credentialRegistration)
+                    } else if let _ = res as? ASAuthorizationPlatformPublicKeyCredentialAssertion {
+                        resolver.reject(WebAuthnError.message("invalid passkeys type"))
+                    } else {
+                        resolver.reject(WebAuthnError.message("invalid passkeys type"))
+                    }
+                }
+            }
+        }.then { credential in
+            let rawClientDataJSON = credential.rawClientDataJSON.toBase64Url()
+            let rawAttestationObject = credential.rawAttestationObject?.toBase64Url()
+            let credentialID = credential.credentialID.toBase64Url()
+            let p: [String: Any] = [
+                "firstFactorCredential": [
+                    "credentialKind": "Fido2",
+                    "credentialInfo": [
+                        "credId" : credentialID,
+                        "clientData": rawClientDataJSON,
+                        "attestationData": rawAttestationObject,
+                    ],
+                ] as [String : Any]
+            ]
+            return self.request.request(path: "register/complete", method: .post, params: ["signedChallenge": p, "temporaryAuthenticationToken" : temporaryAuthenticationToken])
+        }
     }
     
     
-    func register(username: String, password: String) -> Promise<JSON> {
-        return request.request(path: "register/init", method: .post, params: ["username" : username, "password": password]).then { json in
-//            var options = PublicKeyCredentialCreationOptions()
-//            options.rp = PublicKeyCredentialRpEntity(id: json["rp"]["id"].stringValue, name: json["rp"]["name"].stringValue)
-//            options.user = PublicKeyCredentialUserEntity(id: Bytes.fromString(json["user"]["id"].stringValue), displayName: json["user"]["displayName"].stringValue, name: json["user"]["name"].stringValue)
-//            options.challenge = Bytes.fromString(json["challenge"].stringValue)
-//            options.pubKeyCredParams = json["pubKeyCredParams"].arrayValue.compactMap({ _ in
-//                return PublicKeyCredentialParameters(alg: .es256)
-//            })
-//            options.authenticatorSelection = AuthenticatorSelectionCriteria(requireResidentKey: json["authenticatorSelection"]["requireResidentKey"].boolValue, userVerification: UserVerificationRequirement.init(rawValue: json["authenticatorSelection"]["userVerification"].stringValue)!)
-//            options.attestation = AttestationConveyancePreference.init(rawValue: json["attestation"].stringValue) ?? AttestationConveyancePreference.direct
-            return Promise.value(json)
+    func signIn(username: String) -> Promise<JSON> {
+        return request.request(path: "login", method: .post, params: ["username" : username])
+    }
+    
+    
+    func listWallets() -> Promise<JSON> {
+        return request.request(path: "wallets/list", method: .get)
+    }
+    
+    func createWallet(net: String) ->Promise<JSON> {
+        
+        var requestBody: [String: Any] = [:]
+        var challengeIdentifier: String = ""
+        return request.request(path: "wallets/new/init", method: .post, params: ["network": net]).then { json in
+            requestBody = json["requestBody"].dictionaryObject ?? [:]
+            challengeIdentifier = json["challenge"]["challengeIdentifier"].stringValue
+            return Promise<ASAuthorizationPlatformPublicKeyCredentialAssertion> { resolver in
+                self.passKeys.signPassKeys(json) {  res, error in
+                    if let error = error {
+                        resolver.reject(error)
+                    } else if let _ = res as? ASAuthorizationPlatformPublicKeyCredentialRegistration {
+                        resolver.reject(WebAuthnError.message("invalid passkeys type"))
+                    } else if let credential = res as? ASAuthorizationPlatformPublicKeyCredentialAssertion {
+                        resolver.fulfill(credential)
+                    } else {
+                        resolver.reject(WebAuthnError.message("invalid passkeys type"))
+                    }
+                }
+            }
+        }.then { credential in
+//            return {
+//                  kind: 'Fido2',
+//                  credentialAssertion: {
+//                    credId: credential.id,
+//                    clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
+//                    authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
+//                    signature: toBase64Url(Buffer.from(assertion.signature)),
+//                    userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : '',
+//                  },
+//                }
+            let authenticatorData = credential.rawAuthenticatorData.toBase64Url()
+            let rawClientDataJSON = credential.rawClientDataJSON.toBase64Url()
+            let credentialID = credential.credentialID.toBase64Url()
+            let signature = credential.signature.toBase64Url()
+            let userHandle = credential.userID.toBase64Url()
+            
+            let p: [String: Any] = [
+                "requestBody" : requestBody,
+                "signedChallenge" : [
+                    "challengeIdentifier" : challengeIdentifier,
+                    "firstFactor" : [
+                        "kind": "Fido2",
+                        "credentialAssertion": [
+                            "authenticatorData" :  authenticatorData,
+                            "credId" : credentialID,
+                            "clientData": rawClientDataJSON,
+                            "signature": signature,
+                            "userHandle" : userHandle
+                        ],
+                    ] as [String : Any]
+                ] as [String : Any]
+            ]
+            return self.request.request(path: "wallets/new/complete", method: .post, params: p)
         }
     }
 }
@@ -53,7 +131,6 @@ class DfnsManager {
 extension DfnsManager {
     class Request {
         private var headers: [String: Any] = [:]
-        
         private var host: String = ""
         private let USERACTION_HEADER_KEY: String = "X-DFNS-USERACTION"
 
@@ -134,14 +211,13 @@ extension DfnsManager {
                 let url = URL(string: "http://" + "dfns-api.j-labs.xyz:8000" + "/" + path)!
 //                let url = URL(string: "http://" + "localhost:8000" + "/" + path)!
 
-//            https://dfns-api.j-labs.xyz:8000/
                 var defaultHeader = self.getRequestHeaders()
                 defaultHeader.merge(headers, uniquingKeysWith: { $1 })
                 if userAction.count > 0 {
                     defaultHeader[self.USERACTION_HEADER_KEY] = userAction
                 }
                 let httpHeaders = HTTPHeaders(defaultHeader)
-                return AF.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: httpHeaders).promiseResponse()
+                return AF.request(url, method: method, parameters: params, encoding: method == .get ? URLEncoding.default : JSONEncoding.default, headers: httpHeaders).promiseResponse()
             }
         }
         
@@ -291,16 +367,58 @@ extension DfnsManager {
 
 extension DfnsManager {
 
-    class WebAuhn {
+    class Passkeys: NSObject, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate  {
         
-        let rpId: String
-        init(rpId: String) {
-            self.rpId = rpId
+        private var resultBlock: ((ASAuthorizationCredential?, Error?) -> Void)?
+        private var isSign: Bool = false
+    
+        func signPassKeys(_ json: JSON, complete: @escaping (ASAuthorizationCredential?, Error?) -> Void) {
+            self.resultBlock = complete
+            let challenge = json["challenge"]["challenge"].string?.data(using: .utf8) ?? Data()
+            let domain = "j-labs.xyz"
+            let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: domain)
+
+            let assertionRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: challenge)
+            assertionRequest.userVerificationPreference = .required
+            // you can pass in any mix of supported sign in request types here - we only use Passkeys
+            let authController = ASAuthorizationController(authorizationRequests: [ assertionRequest ] )
+            authController.delegate = self
+            authController.presentationContextProvider = self
+            authController.performRequests()
         }
 
+        func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+            return UIApplication.shared.keyWindow!
+        }
+
+        func createPasskeys(_ json: JSON, complete: @escaping (ASAuthorizationCredential?, Error?) -> Void) {
+            self.resultBlock = complete
+            let domain = "j-labs.xyz"
+            let username = json["user"]["name"].stringValue
+            let challenge = json["challenge"].stringValue.data(using: .utf8) ?? Data()
+            let userID = json["user"]["id"].stringValue.data(using: .utf8) ?? Data()
+            let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: domain)
+            let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge,
+                                                                                                      name: username, userID: userID)
+            if let userVerification = json["authenticatorSelection"]["userVerification"].string, userVerification.count > 0 {
+                registrationRequest.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference.init(rawValue: userVerification)
+            }
+
+            let authController = ASAuthorizationController(authorizationRequests: [ registrationRequest ] )
+            authController.delegate = self
+            authController.presentationContextProvider = self
+            authController.performRequests()
+            
+        }
+        
+        func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+            self.resultBlock?(authorization.credential, nil)
+        }
+
+        func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+            self.resultBlock?(nil, error)
+        }
     }
-    
-    
 }
 
 extension Data {
@@ -341,16 +459,22 @@ extension DataRequest {
     func promiseResponse() -> Promise<JSON> {
         return Promise<JSON> { resover in
             let _ = self.response { res in
-                switch res.result {
-                case .success(let data):
-                    if let data = data, let json = try? JSON(data: data) {
-                        resover.fulfill(json)
-                    } else {
-                        print(String(data: data ?? Data(), encoding: .utf8))
-                        resover.reject(WebAuthnError.message("invalid response data"))
+                if res.response?.statusCode == 401 {
+                    appDelegate.gotoLogin()
+                } else {
+                    switch res.result {
+                    case .success(let data):
+                        if let data = data, let json = try? JSON(data: data) {
+                            resover.fulfill(json)
+                        } else if (res.response?.statusCode ?? 0) >= 200 && (res.response?.statusCode ?? 0) < 300 {
+                            resover.fulfill(JSON())
+                        } else {
+                            print(String(data: data ?? Data(), encoding: .utf8))
+                            resover.reject(WebAuthnError.message("invalid response data"))
+                        }
+                    case .failure(let err):
+                        resover.reject(err)
                     }
-                case .failure(let err):
-                    resover.reject(err)
                 }
             }
         }

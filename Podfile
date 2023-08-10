@@ -12,12 +12,17 @@ target 'WebAuthn' do
 pod 'Alamofire'
 pod "PromiseKit"
 pod 'SwiftyJSON'
-pod 'SwiftyRSA'
-pod 'SnapKit'
-pod 'ASN1Decoder'
-pod 'HandyJSON'
 
+pod 'SnapKit'
+pod 'HandyJSON'
+pod 'IQKeyboardManagerSwift'
+pod 'Kingfisher'
+pod 'YYKit'
 pod 'WebAuthnKit'
+pod 'SwiftEventBus'
+pod 'Reusable'
+pod 'SVProgressHUD'
+pod 'Toast-Swift'
 end
 
 
