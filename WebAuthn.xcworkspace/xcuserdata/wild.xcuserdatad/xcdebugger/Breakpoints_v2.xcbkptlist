@@ -270,8 +270,8 @@
             filePath = "WebAuthn/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "registerUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -460,8 +460,8 @@
             filePath = "WebAuthn/DfnsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "promiseResponse()"
             landmarkType = "7">
             <Locations>
@@ -583,10 +583,42 @@
             filePath = "WebAuthn/DfnsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "promiseResponse()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "51C5E75D-8E25-47DF-8F08-19D3ACB4BE5E - 912268eb7998f8b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;SwiftyJSON.JSON&gt;) -&gt; () in Alamofire.DataRequest.promiseResponse() -&gt; PromiseKit.Promise&lt;SwiftyJSON.JSON&gt;"
+                  moduleName = "WebAuthn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wild/Desktop/Mine/Web3/WebAuthn/WebAuthn/DfnsManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "2106">
+               </Location>
+               <Location
+                  uuid = "51C5E75D-8E25-47DF-8F08-19D3ACB4BE5E - 912268eb7998f891"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;SwiftyJSON.JSON&gt;) -&gt; () in Alamofire.DataRequest.promiseResponse() -&gt; PromiseKit.Promise&lt;SwiftyJSON.JSON&gt;"
+                  moduleName = "WebAuthn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wild/Desktop/Mine/Web3/WebAuthn/WebAuthn/DfnsManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "353"
+                  endingLineNumber = "353"
+                  offsetFromSymbolStart = "2001">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -599,17 +631,49 @@
             filePath = "WebAuthn/DfnsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "promiseResponse()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BCF5ECA6-0BD8-4FD9-9B29-FD74319BD90B - 912268eb7998f834"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;SwiftyJSON.JSON&gt;) -&gt; () in Alamofire.DataRequest.promiseResponse() -&gt; PromiseKit.Promise&lt;SwiftyJSON.JSON&gt;"
+                  moduleName = "WebAuthn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wild/Desktop/Mine/Web3/WebAuthn/WebAuthn/DfnsManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "350"
+                  endingLineNumber = "350"
+                  offsetFromSymbolStart = "1893">
+               </Location>
+               <Location
+                  uuid = "BCF5ECA6-0BD8-4FD9-9B29-FD74319BD90B - 912268eb7998f834"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;SwiftyJSON.JSON&gt;) -&gt; () in Alamofire.DataRequest.promiseResponse() -&gt; PromiseKit.Promise&lt;SwiftyJSON.JSON&gt;"
+                  moduleName = "WebAuthn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wild/Desktop/Mine/Web3/WebAuthn/WebAuthn/DfnsManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "350"
+                  endingLineNumber = "350"
+                  offsetFromSymbolStart = "1784">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0D00EBE2-9755-4084-92A7-DA9D0A3C56AE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WebAuthn/ViewController.swift"
@@ -650,6 +714,21 @@
                   endingLineNumber = "124"
                   offsetFromSymbolStart = "861">
                </Location>
+               <Location
+                  uuid = "0D00EBE2-9755-4084-92A7-DA9D0A3C56AE - f6a1e7d6cbc98fa3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftyJSON.JSON) -&gt; () in WebAuthn.ViewController.createUser() -&gt; ()"
+                  moduleName = "WebAuthn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wild/Desktop/Mine/Web3/WebAuthn/WebAuthn/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "2739">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -657,14 +736,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "415FD3BE-5504-41E4-A2FC-4518BA926BC4"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WebAuthn/DfnsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "request(path:method:params:headers:)"
             landmarkType = "7">
          </BreakpointContent>

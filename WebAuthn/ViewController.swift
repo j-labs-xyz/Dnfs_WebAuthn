@@ -109,9 +109,9 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
         self.registerCodeInput.resignFirstResponder()
     }
     
-    var index = 0
+    var index = 200
     @IBAction func createUser() {
-        var name = "leven1" + "\(index)"
+        let name = "leven1" + "\(index)"
         
         DfnsManager.shared.register(username: name, password: "123456").done { options in
             self.index += 1
@@ -125,10 +125,6 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
 
             let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge,
                                                                                                       name: username, userID: userID)
-//            if let attestation = self.registerRes?["attestation"].stringValue, attestation.count > 0  {
-//                registrationRequest.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind.init(rawValue: attestation)
-//            }
-//
             if let userVerification = options["authenticatorSelection"]["userVerification"].string, userVerification.count > 0 {
                 registrationRequest.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference.init(rawValue: userVerification)
             }
@@ -170,10 +166,13 @@ class ViewController: UIViewController, ASAuthorizationControllerPresentationCon
                     ],
                 ] as [String : Any]
             ]
-            DfnsManager.shared.request.completeRegister(params: p, headers: ["Authorization": "Bearer " + token]).done { json in
+            DfnsManager.shared.request.completeRegister(params: p, headers: ["Authorization": token]).done { json in
                 print(json)
+            
                 if let errorMsg = json["error"]["message"].string {
                     self.statusLabel.text = "authorization request failed \n" + errorMsg
+                } else {
+                    self.statusLabel.text = json.rawString() ?? ""
                 }
             }.catch { error in
                 print(error)

@@ -127,6 +127,7 @@ extension DfnsManager {
         
         
         
+        
         func request(path: String, method: HTTPMethod = .get, params: [String: Any] = [:], headers: [String: String] = [:]) -> Promise<JSON> {
             return signAction(headers[USERACTION_HEADER_KEY] == "", path: path, method: method, params: params).then { userAction in
 //                let url = URL(string: "https://" + self.host + "/" + path)!
