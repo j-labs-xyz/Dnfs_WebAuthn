@@ -252,7 +252,7 @@ extension DfnsManager {
                
                 if let data = try? JSONSerialization.data(withJSONObject: clientData), let jsonString = String(data: data, encoding: String.Encoding.utf8) {
                     clientDataString = jsonString
-                    return trySignPayload(dataString: jsonString)
+                    return self.trySignPayload(dataString: jsonString)
                 } else {
                     return Promise<String>.init(error: WebAuthnError.message("invalid challenge string"))
                 }
