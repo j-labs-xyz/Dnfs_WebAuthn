@@ -1,6 +1,0 @@
-framework module WebAuthnKit {
-  umbrella header "WebAuthnKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
